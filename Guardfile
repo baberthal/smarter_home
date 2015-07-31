@@ -27,16 +27,6 @@ guard :bundler do
   files.each { |file| watch(helper.real_path(file)) }
 end
 
-coffeescript_options = {
-  input: 'app/assets/javascripts',
-  output: 'app/assets/javascripts',
-  patterns: [%r{^app/assets/javascripts/(.+\.(?:coffee|coffee\.md|litcoffee))$}]
-}
-
-guard 'coffeescript', coffeescript_options do
-  coffeescript_options[:patterns].each { |pattern| watch(pattern) }
-end
-
 guard 'livereload' do
   watch(%r{app/views/.+\.(erb|haml|slim)$})
   watch(%r{app/helpers/.+\.rb})
@@ -55,7 +45,7 @@ end
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: "bundle exec rspec" do
+guard :rspec, cmd: "zeus rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
@@ -107,3 +97,5 @@ guard :teaspoon do
   # Specs / Helpers
   watch(%r{^spec/javascripts/(.*)})
 end
+
+#  vim: set ts=8 sw=2 tw=0 ft=ruby et :
