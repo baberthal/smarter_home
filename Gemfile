@@ -15,6 +15,8 @@ gem 'postgres_ext'
 gem 'pg_search'
 gem 'puma'
 gem 'omniauth-nest'
+gem 'foreman'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug'
