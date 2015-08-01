@@ -1,0 +1,23 @@
+{
+  "name": "smart_home",
+  "version": "0.0.0",
+  "authors": [
+    "Morgan Lieberthal <morgan@jmorgan.org>"
+  ],
+  "main": "index.html",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "js-cookie": "~2.0.3"
+  }
+}
