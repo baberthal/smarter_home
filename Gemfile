@@ -17,6 +17,8 @@ gem 'puma'
 gem 'omniauth-nest'
 gem 'foreman'
 gem 'devise'
+gem 'haml'
+gem 'haml-rails'
 
 group :development, :test do
   gem 'byebug'
