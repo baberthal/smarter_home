@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require firebase
 //= require js-cookie
+//= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require_tree .

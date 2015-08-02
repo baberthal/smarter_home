@@ -7,8 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render :partial => "shared/nav" %>
+  <% if notice %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
 
-<%= yield %>
+  <% if alert %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
+
+  <%= yield %>
 
 </body>
 </html>
