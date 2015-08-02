@@ -10,4 +10,24 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
+
+  private
+  def request_params(code)
+    ActionController::Parameters.new({
+      code: code,
+      client_id: ENV['NEST_CLIENT_ID'],
+      client_secret: ENV['NEST_CLIENT_SECRET']
+    })
+  end
+
+  def nest_request(code)
+    uri = URI.parse("http://api.home.nest.com/oauth2/access_token")
+    params = request_params(code)
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.set_form_data(params)
+    response = http.request(request)
+    response
+  end
 end
