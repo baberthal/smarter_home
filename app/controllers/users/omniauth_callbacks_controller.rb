@@ -16,7 +16,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     ActionController::Parameters.new({
       code: code,
       client_id: ENV['NEST_CLIENT_ID'],
-      client_secret: ENV['NEST_CLIENT_SECRET']
+      client_secret: ENV['NEST_CLIENT_SECRET'],
+      grant_type: 'authorization_code'
     })
   end
 

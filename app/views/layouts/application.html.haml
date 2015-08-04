@@ -12,4 +12,7 @@
       %p.notice= notice
     - if alert
       %p.alert= alert
-    = yield
+    .col-md-2
+      = render :partial => "shared/sidenav"
+    .col-md-10
+      = yield
