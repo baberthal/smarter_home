@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'postgres_ext'
 gem 'pg_search'
 gem 'puma'
+gem 'omniauth'
 gem 'omniauth-nest'
 gem 'foreman'
 gem 'devise'
