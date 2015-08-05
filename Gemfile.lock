@@ -355,6 +355,7 @@ DEPENDENCIES
   launchy
   omniauth
   omniauth-nest
+  omniauth-oauth2
   pg
   pg_search
   phantomjs

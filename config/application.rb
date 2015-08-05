@@ -33,6 +33,8 @@ module SmartHome
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    config.autoload_paths << Rails.root.join('lib')
+
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'env_vars.yml')
       YAML.load(File.open(env_file)).each do |key, value|
