@@ -89,3 +89,4 @@ bower.json
 .powenv
 
 server.*
+.env
