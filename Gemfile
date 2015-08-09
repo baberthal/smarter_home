@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'postgres_ext'
 gem 'pg_search'
 gem 'puma'
+gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-nest'
