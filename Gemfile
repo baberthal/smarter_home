@@ -38,7 +38,6 @@ group :development, :test do
   gem 'guard-livereload', require: false
   gem 'guard-bundler', require: false
   gem 'guard-teaspoon'
-  gem 'guard-coffeescript'
   gem 'ruby_gntp'
   gem 'capybara'
   gem 'database_cleaner'
@@ -47,4 +46,5 @@ group :development, :test do
   gem 'teaspoon-jasmine'
   gem 'poltergeist'
   gem 'simplecov', require: false
+  gem 'faker'
 end

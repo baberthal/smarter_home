@@ -2,8 +2,9 @@ require 'omniauth/strategies/trakt'
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :developer unless Rails.env.production?
-  provider :nest, ENV['NEST_CLIENT_ID'], ENV['NEST_CLIENT_SECRET']
-  provider :trakt, ENV['TRAKT_CLIENT_ID'], ENV['TRAKT_CLIENT_SECRET']
+  provider :nest, ENV['NEST_ID'], ENV['NEST_SECRET']
+  provider :trakt, ENV['TRAKT_ID'], ENV['TRAKT_SECRET'],
+    strategy_class: OmniAuth::Strategies::Trakt
 end
 
 OmniAuth.config.logger = Rails.logger

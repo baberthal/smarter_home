@@ -1,4 +1,5 @@
 class UserServicesController < ApplicationController
+  include Devise::Controllers::Helpers
 
   def new_trakt
     redirect_to '/auth/trakt'
@@ -9,13 +10,14 @@ class UserServicesController < ApplicationController
   end
 
   def create
-    state = request.params[:state]
-    code = request.params[:code]
-    redirect_to '/nest/token'
+    @user = User.find_or_create_from_auth_hash(auth_hash)
+    self.current_user = @user
+    redirect_to '/'
   end
 
   protected
   def auth_hash
     request.env['omniauth.auth']
   end
+
 end

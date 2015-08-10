@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'factory_girl'
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'faker'
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 def zeus_running?

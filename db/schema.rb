@@ -11,24 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805063239) do
+ActiveRecord::Schema.define(version: 20150810012009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "available_services", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "name"
-  end
-
   create_table "user_services", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "available_service_id"
-    t.string   "service_client_id"
-    t.string   "service_client_secret"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "credentials"
+    t.string   "service"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,8 +41,12 @@ ActiveRecord::Schema.define(version: 20150805063239) do
     t.string   "uid"
     t.string   "name"
     t.string   "image"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

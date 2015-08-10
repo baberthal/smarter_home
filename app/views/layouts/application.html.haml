@@ -8,10 +8,7 @@
     = csrf_meta_tags
   %body
     = render :partial => "shared/nav"
-    - if notice
-      %p.notice= notice
-    - if alert
-      %p.alert= alert
+    = render :partial => "shared/flash_messages", flash: flash
     .col-md-2
       = render :partial => "shared/sidenav"
     .col-md-10

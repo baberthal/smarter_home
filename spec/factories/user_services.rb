@@ -1,9 +1,12 @@
 FactoryGirl.define do
   factory :user_service do
-    belongs_to ""
-belongs_to ""
-service_client_id "MyString"
-service_client_secret "MyString"
+    user
+    service "Nest"
+    credentials {}
+  end
+
+  factory :user_service_with_credentials, parent: :user_service do
+    credentials { { authorization_code: Faker::Number.hexadecimal(25) } }
   end
 
 end

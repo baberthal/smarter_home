@@ -14,8 +14,10 @@ module OmniAuth
       uid do
         access_token.params['uid']
       end
+
+      info do
+        access_token.params['info']
+      end
     end
   end
 end
-
-OmniAuth.config.add_camelization 'trakt', 'Trakt'
