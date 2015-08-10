@@ -22,6 +22,9 @@ gem 'foreman'
 gem 'devise'
 gem 'haml'
 gem 'haml-rails'
+# gem 'rest-client'
+gem 'httpclient'
+gem 'firebase'
 
 group :development, :test do
   gem 'byebug'

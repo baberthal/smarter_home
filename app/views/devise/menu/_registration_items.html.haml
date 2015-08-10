@@ -4,3 +4,12 @@
 - else
   %li
     = link_to 'Register', new_user_registration_path
+  %li.dropdown{:role => 'Presentation'}
+    %a.dropdown-toggle{:data => { :toggle => "dropdown" }, :href => "#", :role => "button", "aria-haspopup" => true, "aria-expanded" => false }
+      Log in with OmniAuth
+      %span.caret
+    - if OmniAuth.strategies.any?
+      %ul.dropdown-menu
+        - OmniAuth.strategies.each do |strategy|
+          %li
+            = link_to "#{strategy.name.split('::').last}", strategy.new(request.env).request_path

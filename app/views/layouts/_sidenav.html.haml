@@ -1,0 +1,23 @@
+%ul.nav.nav-tabs.nav-stacked
+  = render :partial => "devise/menu/registration_items"
+  = render :partial => "devise/menu/login_items"
+  %br
+  %li{ role: 'presentation' }
+    %a{ href: '#' } Overview
+  %li.dropdown{ role: 'presentation' }
+    %a.dropdown-toggle{data: { toggle: 'dropdown' },
+                       href: '#',
+                       role: 'button',
+                       "aria-haspopup" => true,
+                       "aria-expanded" => false }
+      Add a Service
+      %span.caret
+    - if OmniAuth.strategies.any?
+      %ul.dropdown-menu
+        - OmniAuth.strategies.each do |strategy|
+          %li
+            = link_to "#{strategy.name.split('::').last}", strategy.new(request.env).request_path
+
+  %li{ role: 'presentation' }
+    %a{ href: '#' } My Services
+

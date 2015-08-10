@@ -5,4 +5,14 @@ FactoryGirl.define do
     password_confirmation "shhitsasecret"
     confirmed_at Date.today
   end
+
+  factory :user_with_services, parent: :user do
+    transient do
+      service_count 2
+    end
+
+    after(:create) do |user, evaluator|
+      create_list(:user_service, evaluator.service_count, user: user)
+    end
+  end
 end

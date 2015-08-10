@@ -93,6 +93,9 @@ GEM
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
+    firebase (0.2.4)
+      httpclient
+      json
     foreman (0.78.0)
       thor (~> 0.19.1)
     formatador (0.2.5)
@@ -138,6 +141,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     http_parser.rb (0.6.0)
+    httpclient (2.6.0.1)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -346,6 +350,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   faker
+  firebase
   foreman
   guard-bundler
   guard-livereload
@@ -353,6 +358,7 @@ DEPENDENCIES
   guard-teaspoon
   haml
   haml-rails
+  httpclient
   jbuilder (~> 2.0)
   jquery-rails
   launchy

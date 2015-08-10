@@ -7,9 +7,15 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = render :partial => "shared/nav"
-    = render :partial => "shared/flash_messages", flash: flash
-    .col-md-2
-      = render :partial => "shared/sidenav"
-    .col-md-10
-      = yield
+    = render 'layouts/header'
+    .container-fluid
+      .row
+        .container
+          = render 'layouts/messages'
+      .row
+        .col-md-2
+          = render 'layouts/sidenav'
+        .col-md-10
+          = yield
+      .row
+        = render 'layouts/footer'

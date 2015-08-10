@@ -1,34 +1,28 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def nest
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+  # You should configure your model like this:
+  # devise :omniauthable, omniauth_providers: [:twitter]
 
-    if @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication
-      set_flash_message(:notice, :success, :kind => "Nest") if is_navigational_format?
-    else
-      session["devise.nest_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
-    end
-  end
+  # You should also create an action method in this controller like this:
+  # def twitter
+  # end
 
-  private
-  def request_params(code)
-    ActionController::Parameters.new({
-      code: code,
-      client_id: ENV['NEST_CLIENT_ID'],
-      client_secret: ENV['NEST_CLIENT_SECRET'],
-      grant_type: 'authorization_code'
-    })
-  end
+  # More info at:
+  # https://github.com/plataformatec/devise#omniauth
 
-  def nest_request(code)
-    uri = URI.parse("http://api.home.nest.com/oauth2/access_token")
-    params = request_params(code)
+  # GET|POST /resource/auth/twitter
+  # def passthru
+  #   super
+  # end
 
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri.request_uri)
-    request.set_form_data(params)
-    response = http.request(request)
-    response
-  end
+  # GET|POST /users/auth/twitter/callback
+  # def failure
+  #   super
+  # end
+
+  # protected
+
+  # The path used when OmniAuth fails
+  # def after_omniauth_failure_path_for(scope)
+  #   super(scope)
+  # end
 end

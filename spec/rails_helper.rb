@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'devise'
 require 'factory_girl'
 require 'capybara/rails'
 require 'capybara/poltergeist'
@@ -25,7 +26,8 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  # config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: :controller
+  config.extend ControllerMacros, type: :controller
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
@@ -44,6 +46,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
   config.filter_run_excluding :slow unless ENV["SLOW_SPECS"]
@@ -54,3 +57,17 @@ RSpec.configure do |config|
 end
 
 Capybara.javascript_driver = :poltergeist
+OmniAuth.config.test_mode = true
+
+# Helper methods
+def generate_omniauth_hash provider
+  {
+    'uid' => '12345',
+    'provider' => provider,
+    'credentials' => {
+      'token' => Faker::Number.hexadecimal(25),
+      'expires_at' => Faker::Number.number(8),
+      'expires' => true
+    }
+  }
+end

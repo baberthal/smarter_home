@@ -11,13 +11,6 @@ module OmniAuth
         site: "https://trakt.tv"
       }
 
-      uid do
-        access_token.params['uid']
-      end
-
-      info do
-        access_token.params['info']
-      end
     end
   end
 end
