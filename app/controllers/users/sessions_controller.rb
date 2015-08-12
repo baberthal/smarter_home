@@ -13,6 +13,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   # def destroy
+  #   @omniauth_providers = nil
   #   super
   # end
 

@@ -3,4 +3,8 @@ class UserService < ActiveRecord::Base
 
   belongs_to :user
   validates :user, presence: true
+
+  def name
+    self.service
+  end
 end

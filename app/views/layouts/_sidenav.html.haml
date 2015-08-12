@@ -1,3 +1,5 @@
+- @omniauth_providers = OmniAuth.strategies
+
 %ul.nav.nav-tabs.nav-stacked
   = render :partial => "devise/menu/registration_items"
   = render :partial => "devise/menu/login_items"
@@ -12,12 +14,12 @@
                        "aria-expanded" => false }
       Add a Service
       %span.caret
-    - if OmniAuth.strategies.any?
+    - if @omniauth_providers.any?
       %ul.dropdown-menu
-        - OmniAuth.strategies.each do |strategy|
+        - @omniauth_providers.each do |strategy|
           %li
-            = link_to "#{strategy.name.split('::').last}", strategy.new(request.env).request_path
+            = omniauth_link_for strategy
 
   %li{ role: 'presentation' }
-    %a{ href: '#' } My Services
+    = link_to 'My Services', my_services_path
 

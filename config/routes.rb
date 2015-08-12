@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   match '/auth/:provider/callback', to: 'user_services#create', via: [:get, :post]
   get '/auth/failure' => 'auth#failure'
 
+  get '/my/services' => 'user_services#index'
+
 end

@@ -13,4 +13,14 @@ module ApplicationHelper
       flash_type.to_s
     end
   end
+
+  def omniauth_link_for provider
+    unless short_name_for(provider) =~ /oauth2/i
+      link_to "#{short_name_for provider}", provider.new(request.env).request_path
+    end
+  end
+
+  def short_name_for provider
+    provider.name.split('::').last
+  end
 end

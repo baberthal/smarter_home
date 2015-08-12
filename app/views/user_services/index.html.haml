@@ -1,0 +1,10 @@
+.row
+  %h1.text-center My Services
+
+%ul
+  %li services
+  - @services.each do |svc|
+    %li
+      = svc.name
+
+= render_grid_for @services

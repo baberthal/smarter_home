@@ -1,5 +1,5 @@
 class UserServicesController < ApplicationController
-  before_action :authenticate_user!, only: :create
+  before_action :authenticate_user!, only: [:create, :index]
 
   def create
     @omniauth = request.env['omniauth.auth'].to_hash
@@ -19,6 +19,11 @@ class UserServicesController < ApplicationController
       notice: "Successfully authenticated with #{@omniauth['provider']}" }
   end
 
+  def index
+    @user = current_user if user_signed_in?
+    @services = @user.enabled_services
+  end
+
   protected
   def update_user_service user, auth_hash, options = {}
     svc = UserService.find_or_initialize_by(user_id: user.id,
@@ -32,3 +37,4 @@ class UserServicesController < ApplicationController
     end
   end
 end
+

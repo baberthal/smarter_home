@@ -41,4 +41,18 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe "short_name_for" do
+    it 'returns the short name of a provider' do
+      expect(short_name_for OmniAuth::Strategies::Nest).to eq "Nest"
+    end
+  end
+
+  describe "omniauth_link_for" do
+    let(:request) { controller.request }
+    it 'returns the proper link' do
+      expect(omniauth_link_for(OmniAuth::Strategies::Nest)).to match /Nest/
+    end
+  end
+
 end
