@@ -129,3 +129,4 @@ bower_components
 .bower-registry
 .bower-tmp
 
+public/assets/fonts public/assets/images public/assets/stylesheets
