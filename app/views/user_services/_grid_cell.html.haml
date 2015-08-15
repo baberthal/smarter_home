@@ -1,0 +1,11 @@
+- if service
+  %div.thumbnail
+    - if service.image
+      = image_tag service.image, class: "service-image"
+      %div.caption
+        %h3
+          = service.name
+        %p
+          = service.description if service.description
+        %p
+          = link_to 'Manage', manage_service_path(service), class: 'btn btn-primary', role: 'button'

@@ -11,6 +11,10 @@ Rails.root.join('vendor', 'assets', 'bower_components').to_s.tap do |bower_path|
   Rails.application.config.assets.paths << bower_path
 end
 
-Rails.application.config.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+twbs = %r{bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$}
 
-::Sass::Script::Value::Number.precision = [ 8, ::Sass::Script::Value::Number.precision].max
+Rails.application.config.assets.precompile << twbs
+
+number_precision = [8, ::Sass::Script::Value::Number.precision].max
+
+::Sass::Script::Value::Number.precision = number_precision

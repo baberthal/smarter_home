@@ -1,0 +1,21 @@
+// Set $icon-font-path for bootstrap because Rails asset pipeline
+$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+@import 'base/iconFont';
+
+// Override bootstrap variables
+@import "shared/variables";
+
+// Import bootstrap-sprockets and our very own bootstrap custom
+@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "bootstrap/bootstrap_custom";
+
+// Import font-awsome icons
+
+
+// Import our own shared styles
+@import "shared";
+
+// Import specific controller stylesheets
+@import "services/user_services";
+
+//  vim: set ts=8 sw=2 tw=0 ft=scss noet :

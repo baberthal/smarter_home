@@ -1,2 +1,4 @@
-module Services::NestHelper
+module Services
+  module NestHelper
+  end
 end

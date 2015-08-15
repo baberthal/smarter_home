@@ -1,0 +1,4 @@
+@function border-color-for($kolor, $amount) {
+  $retKolor: darken(adjust-hue($kolor, -10), $amount);
+  @return $retKolor;
+}

@@ -1,0 +1,4 @@
+<%= javascript_tag do %>
+  window.devices = <%= raw @interface.devices.to_json %>;
+  window.structures = <%= raw @interface.structures.to_json  %>;
+<% end %>

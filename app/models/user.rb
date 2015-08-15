@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   has_many :enabled_services, class_name: UserService
 
   def services
-    self.enabled_services
+    enabled_services
   end
-
 end

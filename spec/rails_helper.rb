@@ -3,7 +3,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('ABORT! Production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'devise'
 require 'factory_girl'
@@ -13,7 +13,7 @@ require 'faker'
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 def zeus_running?
-  File.exists? 'zeus.sock'
+  File.exist? 'zeus.sock'
 end
 
 unless zeus_running?
@@ -46,10 +46,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
-  config.filter_run_excluding :slow unless ENV["SLOW_SPECS"]
+  config.filter_run_excluding :slow unless ENV['SLOW_SPECS']
 
   config.order = :random
   config.use_transactional_fixtures = true
@@ -60,7 +59,7 @@ Capybara.javascript_driver = :poltergeist
 OmniAuth.config.test_mode = true
 
 # Helper methods
-def generate_omniauth_hash provider
+def generate_omniauth_hash(provider)
   {
     'uid' => '12345',
     'provider' => provider,

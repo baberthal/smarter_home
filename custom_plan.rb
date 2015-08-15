@@ -1,7 +1,7 @@
 require 'zeus/rails'
 
 class CustomPlan < Zeus::Rails
-  def test *args
+  def test(*args)
     require 'simplecov'
     SimpleCov.start 'rails'
     ENV['GUARD_RSPEC_RESULTS_FILE'] = 'tmp/guard_rspec_results.txt'
@@ -15,7 +15,7 @@ class CustomPlan < Zeus::Rails
     @console = ::Teaspoon::Console.new({})
   end
 
-  def teaspoon(argv=ARGV)
+  def teaspoon(argv = ARGV)
     @console.execute(argv[0])
   end
 end

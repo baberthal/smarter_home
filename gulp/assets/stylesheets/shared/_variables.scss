@@ -1,0 +1,59 @@
+@import 'functions';
+
+// Vendor-specific colors
+$nest-blue: #00afd8;
+$nest-gray: #7b858e;
+$nest-blue-border: darken($nest-blue, 10%);
+$white: #fff;
+
+
+// Nest-specific warning colors
+$nest-emergency: #e63117;
+$nest-issue: #fbcd36;
+$nest-no-issues: #39c226;
+
+// Brand color palette
+$smart-home-primary: #0C88EF;
+$smart-home-primary-shade-1: #59AAEE; // Success background
+$smart-home-primary-shade-2: #2D97EF;
+$smart-home-primary-shade-3: #0372CE;
+$smart-home-primary-shade-4: #035191; // Success text
+
+$smart-home-green: #00F190;
+$smart-home-green-1: #4FF0AF; // Info background
+$smart-home-green-2: #1FF19C;
+$smart-home-green-3: #00D37E;
+$smart-home-green-4: #00995B; // Info text
+
+$smart-home-yellow: #FFC000;
+$smart-home-yellow-1: #FFD554; // Warning bg
+$smart-home-yellow-2: #FFC921;
+$smart-home-yellow-3: #FFC000;
+$smart-home-yellow-4: #8a6800; // Warning text
+
+$smart-home-red: #FF4C00;
+$smart-home-red-1: #FF8754; // Danger bg
+$smart-home-red-2: #FF6321;
+$smart-home-red-3: #FF4C00;
+$smart-home-red-4: #E14300; // Danger text
+
+// Brand colors
+$smart-home: $smart-home-primary;
+$smart-home-blue-darker: $smart-home-primary-shade-4;
+$smart-home-blue-lighter: $smart-home-primary-shade-1;
+
+// state colors
+$smart-home-success-text: $smart-home-primary-shade-4;
+$smart-home-success-bg: $smart-home-primary-shade-1;
+
+$smart-home-info-text: $smart-home-green-4;
+$smart-home-info-bg: $smart-home-green-1;
+
+$smart-home-warning-text: $smart-home-yellow-4;
+$smart-home-warning-bg: $smart-home-yellow-1;
+
+$smart-home-danger-text: $smart-home-red-4;
+$smart-home-danger-bg: $smart-home-red-1;
+
+
+@import "../bootstrap/custom_bootstrap_variables";

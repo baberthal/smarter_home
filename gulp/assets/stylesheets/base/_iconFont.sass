@@ -1,0 +1,33 @@
+// DO NOT EDIT DIRECTLY!
+ Generated from undefined
+
+@font-face
+  font-family: my-icon-font
+  src: url("/assets/fonts/my-icon-font.eot")
+  src: url("/assets/fonts/my-icon-font.eot?#iefix") format('embedded-opentype'), url("/assets/fonts/my-icon-font.woff") format('woff'), url("/assets/fonts/my-icon-font.ttf") format('truetype'), url("/assets/fonts/my-icon-font.svg#my-icon-font") format('svg')
+  font-weight: normal
+  font-style: normal
+
+=icon($content)
+  &:before
+    -moz-osx-font-smoothing: grayscale
+    -webkit-font-smoothing: antialiased
+    content: $content
+    font-family: 'my-icon-font'
+    font-style: normal
+    font-variant: normal
+    font-weight: normal
+    line-height: 1
+    speak: none
+    text-transform: none
+    @content
+
+=icon--snowflake
+  +icon("\E001")
+    @content
+
+.icon
+  &.-snowflake
+    +icon--snowflake
+
+

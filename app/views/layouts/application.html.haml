@@ -13,9 +13,8 @@
         .container
           = render 'layouts/messages'
       .row
-        .col-md-2
+        .col-md-3.sidenav
           = render 'layouts/sidenav'
-        .col-md-10
+        .col-md-9
           = yield
-      .row
-        = render 'layouts/footer'
+    = render 'layouts/footer'

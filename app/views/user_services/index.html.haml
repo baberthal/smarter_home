@@ -1,10 +1,4 @@
-.row
-  %h1.text-center My Services
+%h1.text-center My Services
 
-%ul
-  %li services
-  - @services.each do |svc|
-    %li
-      = svc.name
-
-= render_grid_for @services
+- @services.each_slice(4) do |slice|
+  = render :partial => "grid_row", locals: { slice: slice }

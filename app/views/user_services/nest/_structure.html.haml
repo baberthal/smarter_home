@@ -1,0 +1,8 @@
+.panel{class: "#{class_for_away(structure.away)}"}
+  .panel-heading
+    = structure.name
+    = structure.away_header
+  .panel-body
+    .list-group{ id: structure.html_id }
+      - @interface.devices.select { |d| d.structure_id == structure.id }.each do |device|
+        = render "user_services/nest/device_list_item", device: device

@@ -1,9 +1,8 @@
 module ControllerMacros
-
   def login_user
+    let(:user) { FactoryGirl.create(:user) }
     before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      user = FactoryGirl.create(:user)
+      @request.env['devise.mapping'] = Devise.mappings[:user]
       sign_in user
     end
   end
@@ -12,22 +11,20 @@ module ControllerMacros
     before :each do
       user = FactoryGirl.create(:user)
       sign_in user
-      OmniAuth.config.add_mock(:developer, {:uid => '12345' })
+      OmniAuth.config.add_mock(:developer, uid: '12345')
     end
   end
 
-  def create_mock_auth provider
-    OmniAuth.config.mock_auth[:prov] = OmniAuth::AuthHash.new({
-      :provider => "#{provider}",
-      :uid => Faker::Internet.email,
-      :credentials => { authorization_code: Faker::Number.hexadecimal(25) }
-    })
+  def create_mock_auth(provider)
+    OmniAuth.config.mock_auth[:prov] =
+      OmniAuth::AuthHash.new(
+        provider: "#{provider}",
+        uid: Faker::Internet.email,
+        credentials: { authorization_code: Faker::Number.hexadecimal(25) }
+      )
   end
 
-  def mock_failure provider
+  def mock_failure(provider)
     OmniAuth.config.mock_auth[provider] = :invalid_credentials
-  end
-
-  def cleanup_omniauth
   end
 end

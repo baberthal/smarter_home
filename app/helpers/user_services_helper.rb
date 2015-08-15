@@ -1,36 +1,35 @@
 module UserServicesHelper
-  def render_grid_for services
-    services.each_slice(4) do |slice|
-      render_row slice
+  def class_for_away(away_type)
+    case away_type
+    when 'away'
+      'panel-nest-away'
+    when 'home'
+      'panel-nest-home'
+    else
+      away_type.to_s
     end
   end
 
-  def render_row service_slice
-    content_tag :div, class: 'row' do
-      content_tag :div, class: 'col-md-4' do
-        render_box_for service_slice[0] unless service_slice[0].nil?
-      end
-      content_tag :div, class: 'col-md-4' do
-        render_box_for service_slice[1] unless service_slice[1].nil?
-      end
-      content_tag :div, class: 'col-md-4' do
-        render_box_for service_slice[2] unless service_slice[2].nil?
-      end
-      content_tag :div, class: 'col-md-4' do
-        render_box_for service_slice[3] unless service_slice[3].nil?
-      end
+  def status_class_for(device)
+    case device.stats['hvac_state']
+    when 'heating'
+      'heat'
+    when 'cooling'
+      'cool'
+    else
+      device.stats['hvac_state'].to_s
     end
   end
 
-  def render_box_for service
-    content_tag :div, class: 'thumbnail' do
-      if service.image
-        image_tag service.image
-      end
-      content_tag :div, class: 'caption' do
-        content_tag :h3, service.name
-        content_tag :p, service.description if service.description
-      end
+  def heat_cool_icon(device)
+    case device.stats['hvac_state']
+    when 'heating'
+      icon = "<span class='glyphicon glyphicon-fire pull-right'></i>"
+    when 'cooling'
+      icon = "<span class='icon -snowflake'></i>"
+    else
+      icon = ''
     end
+    icon.html_safe
   end
 end

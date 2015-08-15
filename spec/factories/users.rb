@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
-    password "shhitsasecret"
-    password_confirmation "shhitsasecret"
-    confirmed_at Date.today
+    password 'shhitsasecret'
+    password_confirmation 'shhitsasecret'
+    confirmed_at Time.zone.today
   end
 
   factory :user_with_services, parent: :user do

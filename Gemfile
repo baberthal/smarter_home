@@ -37,10 +37,13 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rb-fsevent', require: false
   gem 'launchy'
+  gem 'rubocop', require: false
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
   gem 'guard-bundler', require: false
+  gem 'guard-rubocop'
   gem 'guard-teaspoon'
+  gem 'rubocop-rspec'
   gem 'ruby_gntp'
   gem 'capybara'
   gem 'database_cleaner'

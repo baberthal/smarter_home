@@ -1,0 +1,9 @@
+@import 'bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+
+.panel-nest-home {
+  @include panel-variant($nest-blue-border,
+                         $white,
+                         $nest-blue,
+                         $nest-blue-border);
+}
+

@@ -1,3 +1,5 @@
+#  vim: set ts=8 sw=2 tw=0 ft=ruby et :
+#
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
@@ -15,6 +17,9 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
+clearing :on
+notification :gntp, host: '127.0.0.1'
+
 guard :bundler do
   require 'guard/bundler'
   require 'guard/bundler/verify'
@@ -27,76 +32,74 @@ guard :bundler do
   files.each { |file| watch(helper.real_path(file)) }
 end
 
-guard 'livereload' do
-  watch(%r{app/views/.+\.(erb|haml|slim)$})
-  watch(%r{app/helpers/.+\.rb})
-  watch(%r{public/.+\.(css|js|html)})
-  watch(%r{config/locales/.+\.yml})
-  # Rails Assets Pipeline
-  watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html|png|jpg))).*}) { |m| "/assets/#{m[3]}" }
-end
+group :red_green_refactor, halt_on_fail: true do
 
-# Note: The cmd option is now required due to the increasing number of ways
-#       rspec may be run, below are examples of the most common uses.
-#  * bundler: 'bundle exec rspec'
-#  * bundler binstubs: 'bin/rspec'
-#  * spring: 'bin/rspec' (This will use spring if running and you have
-#                          installed the spring binstubs per the docs)
-#  * zeus: 'zeus rspec' (requires the server to be started separately)
-#  * 'just' rspec: 'rspec'
+  rspec_options = {
+    results_file: 'tmp/guard_rspec_results.txt',
+    cmd: "zeus rspec",
+    all_after_pass: true,
+    failed_mode: :focus
+  }
 
+  guard :rspec, rspec_options do
+    require "guard/rspec/dsl"
+    dsl = Guard::RSpec::Dsl.new(self)
 
-rspec_options = {
-  results_file: 'tmp/guard_rspec_results.txt',
-  cmd: "zeus rspec",
-  all_after_pass: true,
-  failed_mode: :focus
-}
+    # Feel free to open issues for suggestions and improvements
 
-guard :rspec, rspec_options do
-  require "guard/rspec/dsl"
-  dsl = Guard::RSpec::Dsl.new(self)
+    # RSpec files
+    rspec = dsl.rspec
+    watch(rspec.spec_helper) { rspec.spec_dir }
+    watch(rspec.spec_support) { rspec.spec_dir }
+    watch(rspec.spec_files)
 
-  # Feel free to open issues for suggestions and improvements
+    # Ruby files
+    ruby = dsl.ruby
+    dsl.watch_spec_files_for(ruby.lib_files)
 
-  # RSpec files
-  rspec = dsl.rspec
-  watch(rspec.spec_helper) { rspec.spec_dir }
-  watch(rspec.spec_support) { rspec.spec_dir }
-  watch(rspec.spec_files)
+    # Rails files
+    rails = dsl.rails(view_extensions: %w(erb haml slim))
+    dsl.watch_spec_files_for(rails.app_files)
+    dsl.watch_spec_files_for(rails.views)
 
-  # Ruby files
-  ruby = dsl.ruby
-  dsl.watch_spec_files_for(ruby.lib_files)
+    watch(rails.controllers) do |m|
+      [
+        rspec.spec.("routing/#{m[1]}_routing"),
+        rspec.spec.("controllers/#{m[1]}_controller"),
+        rspec.spec.("acceptance/#{m[1]}")
+      ]
+    end
 
-  # Rails files
-  rails = dsl.rails(view_extensions: %w(erb haml slim))
-  dsl.watch_spec_files_for(rails.app_files)
-  dsl.watch_spec_files_for(rails.views)
+    # Rails config changes
+    watch(rails.spec_helper)     { rspec.spec_dir }
+    watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
+    watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
-  watch(rails.controllers) do |m|
-    [
-      rspec.spec.("routing/#{m[1]}_routing"),
-      rspec.spec.("controllers/#{m[1]}_controller"),
-      rspec.spec.("acceptance/#{m[1]}")
-    ]
+    # Capybara features specs
+    watch(rails.view_dirs)     { |m| rspec.spec.("features/#{m[1]}") }
+    watch(rails.layouts)       { |m| rspec.spec.("features/#{m[1]}") }
+
+    # Turnip features and steps
+    watch(%r{^spec/acceptance/(.+)\.feature$})
+    watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
+      Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
+    end
   end
 
-  # Rails config changes
-  watch(rails.spec_helper)     { rspec.spec_dir }
-  watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
-  watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
-  # Capybara features specs
-  watch(rails.view_dirs)     { |m| rspec.spec.("features/#{m[1]}") }
-  watch(rails.layouts)       { |m| rspec.spec.("features/#{m[1]}") }
+  rubocop_options = {
+    all_on_start: true,
+    cli: ['--rails', '--format', 'progress', '--format', 'html', '-o', 'spec/rubocop.html'],
+    notification: true
+  }
 
-  # Turnip features and steps
-  watch(%r{^spec/acceptance/(.+)\.feature$})
-  watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
+  guard :rubocop, rubocop_options do
+    watch(%r{.+\.rb$})
+    watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
   end
 end
+
+
 
 guard :teaspoon do
   # Implementation files
@@ -106,4 +109,3 @@ guard :teaspoon do
   watch(%r{^spec/javascripts/(.*)})
 end
 
-#  vim: set ts=8 sw=2 tw=0 ft=ruby et :
