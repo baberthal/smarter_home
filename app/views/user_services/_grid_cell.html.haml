@@ -1,7 +1,7 @@
 - if service
   %div.thumbnail
     - if service.image
-      = image_tag service.image, class: "service-image"
+      = gulp_image_tag service.image, class: "service-image"
       %div.caption
         %h3
           = service.name
