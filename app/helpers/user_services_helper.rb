@@ -21,6 +21,11 @@ module UserServicesHelper
     end
   end
 
+  def leaf_icon(options = {})
+    options = options.merge(class: 'leaf')
+    gulp_image_tag('nest_leaf.svg', options)
+  end
+
   def heat_cool_icon(device)
     case device.stats['hvac_state']
     when 'heating'
