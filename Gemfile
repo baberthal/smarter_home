@@ -53,4 +53,5 @@ group :development, :test do
   gem 'poltergeist'
   gem 'simplecov', require: false
   gem 'faker'
+  gem 'colorize'
 end
