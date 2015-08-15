@@ -130,3 +130,4 @@ bower_components
 .bower-tmp
 
 public/assets/fonts public/assets/images public/assets/stylesheets
+public/assets
