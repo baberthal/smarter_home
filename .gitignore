@@ -131,3 +131,4 @@ bower_components
 
 public/assets/fonts public/assets/images public/assets/stylesheets
 public/assets
+spec/rubocop.html
