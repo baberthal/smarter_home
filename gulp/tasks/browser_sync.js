@@ -8,3 +8,5 @@ var config = require('../config').browserSync;
 gulp.task('browserSync', function() {
     browserSync.init(config);
 });
+
+module.exports = browserSync;

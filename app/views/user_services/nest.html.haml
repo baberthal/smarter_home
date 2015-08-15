@@ -10,8 +10,8 @@
   .col-md-8#right-side
     - @dec = @interface.decorate
     .well#viewing-area
-      .h3.device-name
-        = @dec.first_device.name
+      = render :partial => "user_services/nest/device_view",
+        locals: { device: @dec.devices.first.decorate }
 
 
 = render :partial => "user_services/nest/js_vars"

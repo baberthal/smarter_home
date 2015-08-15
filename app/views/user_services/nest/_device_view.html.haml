@@ -1,5 +1,31 @@
-.section-header{ class: nest_class_for(device) }
-  .h3.device-name
-    = device.name
-    = leaf_icon? device
+.row
+  .col-md-8
+    .device-name
+      %h3
+        = device.name
+  .col-md-4
+    .leaf
+    - if device.nest_leaf?
+      = leaf_icon
+.row
+  .col-md-6
+    %table.device-stats-table
+      %tr
+        %td
+          Current Ambient Temperature
+        %td
+          = device.current_ambient
+      %tr
+        %td
+          Current Target
+        %td
+          = device.current_target
+      %tr
+        %td
+          Humidity
+        %td
+          = device.humidity
+  .col-md-6
+    .current-target
+      = device.current_target_formatted
 
