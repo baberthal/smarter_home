@@ -70,3 +70,7 @@ def generate_omniauth_hash(provider)
     }
   }
 end
+
+def read_json(relative_path)
+  JSON.parse(File.read("spec/support/#{relative_path}"))
+end
